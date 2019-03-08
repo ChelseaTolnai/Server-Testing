@@ -12,8 +12,8 @@ function getAll() {
   return db('employees');
 }
 
-function getById(id) {
-  return null;
+async function getById(id) {
+  return await db('employees').where({ id }).first();
 }
 
 function insert(employee) {

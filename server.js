@@ -5,10 +5,10 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.json({ message: "Server working" });
+    res.status(200).json({ message: "Server working" });
 });
 
-server.get("/employees/", (req, res) => {
+server.get("/employees/", async (req, res) => {
     return null
 });
 

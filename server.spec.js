@@ -47,4 +47,26 @@ describe('server.js', () => {
 
     });
 
+    describe('GET /employee/:id', () => {
+
+        it('should return 200 OK', async () => {
+            const res = await request(server).get('/employees/:id');
+            expect(res.status).toBe(200);
+        })
+
+        it('should return JSON', async () => {
+            const res = await request(server).get('/employees/:id');
+            expect(res.type).toBe('application/json');
+        });
+
+        it('should return employee by specified id', async () => {
+            const res = await request(server).get('/employees/:id');
+            expect(res.body).toBeDefined;
+            expect(res.body.id).toBeDefined;
+            expect(res.body.name).toBeDefined;
+            expect(res.body.jobTitle).toBeDefined;
+        });
+
+    });
+
 });

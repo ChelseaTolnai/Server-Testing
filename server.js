@@ -19,12 +19,22 @@ server.get('/employees/', async (req, res) => {
     }
 });
 
-server.get("/employees/:id", (req, res) => {
-    return null
+server.get('/employees/:id', async (req, res) => {
+    try {
+        const employee = await Employees.getById(req.params.id);
+        res.status(200).json(employee);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
-server.post("/employees", (req, res) => {
-    return null
+server.post("/employees", async (req, res) => {
+    try {
+        const employee = await Employees.insert(req.body);
+        res.status(201).json(employee);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 server.delete("/employees/:id", (req, res) => {

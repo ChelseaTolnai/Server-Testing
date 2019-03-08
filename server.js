@@ -28,7 +28,7 @@ server.get('/employees/:id', async (req, res) => {
     }
 });
 
-server.post("/employees", async (req, res) => {
+server.post('/employees', async (req, res) => {
     try {
         const employee = await Employees.insert(req.body);
         res.status(201).json(employee);
@@ -37,7 +37,7 @@ server.post("/employees", async (req, res) => {
     }
 });
 
-server.delete("/employees/:id", (req, res) => {
+server.delete('/employees/:id', (req, res) => {
     return null
 });
 

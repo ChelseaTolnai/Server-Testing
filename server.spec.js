@@ -69,4 +69,27 @@ describe('server.js', () => {
 
     });
 
+    describe('POST /employee', () => {
+
+        it('should return 200 OK', async () => {
+            const newEmployee = { name: 'Ryan Bartell', jobTitle: 'Senior Data Manager' }
+            const res = await request(server).post('/employees').send(newEmployee);
+            expect(res.status).toBe(201);
+        })
+
+        it('should return JSON', async () => {
+            const res = await request(server).post('/employees');
+            expect(res.type).toBe('application/json');
+        });
+
+        it('should return employee by specified id', async () => {
+            const newEmployee = { name: 'Ryan Bartell', jobTitle: 'Senior Data Manager' }
+            const res = await request(server).post('/employees').send(newEmployee);
+            expect(res.body).toBeDefined;
+            expect(res.body.name).toBe(newEmployee.name);
+            expect(res.body.jobTitle).toBe(newEmployee.jobTitle);
+        });
+
+    });
+
 });

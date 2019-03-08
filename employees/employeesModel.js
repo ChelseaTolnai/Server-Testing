@@ -12,12 +12,13 @@ function getAll() {
   return db('employees');
 }
 
-async function getById(id) {
-  return await db('employees').where({ id }).first();
+function getById(id) {
+  return db('employees').where({ id }).first();
 }
 
-function insert(employee) {
-  return null
+async function insert(employee) {
+  const [id] = await db('employees').insert(employee);
+  return db('employees').where({ id }).first();
 }
 
 function update(id, changes) {

@@ -4,4 +4,28 @@ const server = express();
 
 server.use(express.json());
 
+server.get('/', (req, res) => {
+    res.json({ message: "Server working" });
+});
+
+server.get("/employees/", (req, res) => {
+    return null
+});
+
+server.get("/employees/:id", (req, res) => {
+    return null
+});
+
+server.post("/employees", (req, res) => {
+    return null
+});
+
+server.put("/employees/:id", (req, res) => {
+    return null
+});
+
+server.delete("/employees/:id", (req, res) => {
+    return null
+});
+
 module.exports = server;

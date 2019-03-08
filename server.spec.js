@@ -27,4 +27,24 @@ describe('server.js', () => {
 
     });
 
+    describe('GET /employees', () => {
+
+        it('should return 200 OK', async () => {
+            const res = await request(server).get('/employees');
+            expect(res.status).toBe(200);
+        })
+
+        it('should return JSON', async () => {
+            const res = await request(server).get('/employees');
+            expect(res.type).toBe('application/json');
+        });
+
+        it('should return array of employees', async () => {
+            const res = await request(server).get('/employees');
+            expect(res.body).toBeDefined;
+            expect(res.body).toHaveLength;
+        });
+
+    });
+
 });

@@ -4,7 +4,6 @@ module.exports = {
   getAll,
   getById,
   insert,
-  update,
   remove,
 };
 
@@ -21,11 +20,7 @@ async function insert(employee) {
   return db('employees').where({ id }).first();
 }
 
-function update(id, changes) {
-  return null;
-}
-
 function remove(id) {
-  return null;
+  return db('employees').where({ id }).del();
 }
 

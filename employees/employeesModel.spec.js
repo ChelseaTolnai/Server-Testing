@@ -49,4 +49,26 @@ describe('employee model', () => {
         });
 
     });
+
+    describe('delete()', () => {
+
+        it('should delete the employee by id and return deleted count', async () => {
+            const employees = await Employees.getAll();
+            expect(employees).toHaveLength(4);
+
+            const employee5 = await Employees.remove(5); // id does not exist
+            expect(employee5).toBe(0); // should not remove any
+
+            let employee4 = await Employees.remove(4); // id exists
+            expect(employee4).toBe(1); // 1 employee should be deleted
+            
+            employee4 = await Employees.getById(4);
+            expect(employee4).toBeUndefined; // Employee should no longer exist in db
+
+            const employeesUpdated = await Employees.getAll();
+            expect(employeesUpdated).toHaveLength(3);
+
+        });
+
+    });
 });

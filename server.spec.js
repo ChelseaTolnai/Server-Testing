@@ -82,12 +82,36 @@ describe('server.js', () => {
             expect(res.type).toBe('application/json');
         });
 
-        it('should return employee by specified id', async () => {
+        it('should input new employee and return that added employee', async () => {
             const newEmployee = { name: 'Ryan Bartell', jobTitle: 'Senior Data Manager' }
             const res = await request(server).post('/employees').send(newEmployee);
             expect(res.body).toBeDefined;
             expect(res.body.name).toBe(newEmployee.name);
             expect(res.body.jobTitle).toBe(newEmployee.jobTitle);
+        });
+
+    });
+
+    describe('DELETE /employee/:id', () => {
+
+        it('should return 200 OK', async () => {
+            const newEmployee = { name: 'Ryan Bartell', jobTitle: 'Senior Data Manager' }
+            const post = await request(server).post('/employees').send(newEmployee);
+            const res = await request(server).delete(`/employees/${post.body.id}`);
+            expect(res.status).toBe(200);
+        })
+
+        it('should return JSON', async () => {
+            const res = await request(server).delete('/employees/:id');
+            expect(res.type).toBe('application/json');
+        });
+
+        it('should delete employee by specified id and return count of deleted', async () => {
+            const newEmployee = { name: 'Ryan Bartell', jobTitle: 'Senior Data Manager' }
+            const post = await request(server).post('/employees').send(newEmployee);
+            const res = await request(server).delete(`/employees/${post.body.id}`);
+            expect(res.body.message).toBeDefined;
+            expect(res.body.count).toBe(1);
         });
 
     });

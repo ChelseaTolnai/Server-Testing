@@ -37,8 +37,13 @@ server.post('/employees', async (req, res) => {
     }
 });
 
-server.delete('/employees/:id', (req, res) => {
-    return null
+server.delete('/employees/:id', async (req, res) => {
+    try {
+        const count = await Employees.remove(req.params.id);
+        res.status(200).json({ message: 'Number of Employees deleted', count });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 module.exports = server;
